@@ -182,11 +182,12 @@ export default {
           name: this.form.name,
           password: this.form.password,
           role: this.form.role,
-          email: this.form.email
+          email: this.form.email,
+          avatar: 'https://placekitten.com/200/200'
         }
         userApi.add(newUser).then((res) => {
           this.$buefy.snackbar.open({
-            message: `Thành công: Đã thêm User "${res.data?.data?.name}" với ID: ${res.data?.data?.id}`,
+            message: 'Thêm người dùng thành công',
             queue: false
           })
         }).catch(e => {

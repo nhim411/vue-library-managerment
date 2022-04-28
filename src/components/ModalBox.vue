@@ -16,7 +16,7 @@
       </header>
       <section class="modal-card-body">
         <p>
-          Người dùng <b>{{ trashObjectName }}</b> sẽ bị xoá
+          <b>{{ trashObjectName }}</b> sẽ bị xoá
         </p>
         <p>Thao tác không thể hoàn tác.</p>
       </section>

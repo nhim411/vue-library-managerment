@@ -27,9 +27,10 @@ export default {
   },
   created () {
     this.$store.commit('user', {
-      name: 'John Doe',
-      email: 'john@example.com',
-      avatar: 'https://avatars.dicebear.com/v2/gridy/John-Doe.svg'
+      name: 'Nam',
+      email: 'nam@example.com',
+      avatar: 'https://avatars.dicebear.com/v2/gridy/John-Doe.svg',
+      role: 'admin'
     })
   }
 }

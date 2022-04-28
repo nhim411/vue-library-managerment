@@ -4,12 +4,15 @@ export default [
     {
       to: '/users',
       icon: 'account-cog',
-      label: 'User Manager'
+      label: 'User Manager',
+      authRequired: true
     },
     {
-      to: '/',
+      to: '/books',
       icon: 'book-lock',
-      label: 'Book Manager'
+      label: 'Book Manager',
+      authRequired: true
+
     }
   ],
   'General',

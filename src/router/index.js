@@ -79,6 +79,37 @@ const routes = [
     props: true
   },
   {
+    meta: {
+      title: 'Book Manager'
+    },
+    path: '/books',
+    name: 'BookManager',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "BookManager" */ '@/views/BookManager.vue')
+  },
+  {
+    meta: {
+      title: 'New Book'
+    },
+    path: '/books/new',
+    name: 'books.new',
+    component: () =>
+      import(/* webpackChunkName: "BookManagerForm" */ '@/views/BookManagerForm.vue')
+  },
+  {
+    meta: {
+      title: 'Edit Book'
+    },
+    path: '/books/:id',
+    name: 'books.edit',
+    component: () =>
+      import(/* webpackChunkName: "BookManagerForm" */ '@/views/BookManagerForm.vue'),
+    props: true
+  },
+  {
     path: '/full-page',
     component: () =>
       import(/* webpackChunkName: "full-page" */ '@/views/FullPage.vue'),
@@ -93,13 +124,19 @@ const routes = [
           import(
             /* webpackChunkName: "full-page" */ '@/views/full-page/Login.vue'
           )
+      },
+      {
+        meta: {
+          title: 'Not Found'
+        },
+        path: '/*',
+        name: 'NotFound',
+        component: () =>
+          import(
+            /* webpackChunkName: "NotFound" */ '@/views/NotFound.vue'
+          )
       }
     ]
-  },
-  {
-    path: '/full-page',
-    component: () =>
-      import(/* webpackChunkName: "full-page" */ '@/views/FullPage.vue')
   }
 ]
 

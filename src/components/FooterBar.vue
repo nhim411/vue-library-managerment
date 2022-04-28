@@ -21,12 +21,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  name: 'FooterBar',
-  data () {
-    return {
-      year: new Date().getFullYear()
-    }
-  },
   computed: {
     ...mapState([
       'isFooterBarVisible'

@@ -38,7 +38,7 @@
           </b-field>
         </card-component>
       </tiles>
-      <password-update-form />
+      <!-- <password-update-form /> -->
     </section>
   </div>
 </template>
@@ -49,7 +49,7 @@ import CardComponent from '@/components/CardComponent.vue'
 import TitleBar from '@/components/TitleBar.vue'
 import HeroBar from '@/components/HeroBar.vue'
 import ProfileUpdateForm from '@/components/ProfileUpdateForm.vue'
-import PasswordUpdateForm from '@/components/PasswordUpdateForm.vue'
+// import PasswordUpdateForm from '@/components/PasswordUpdateForm.vue'
 import Tiles from '@/components/Tiles.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
 
@@ -58,7 +58,7 @@ export default {
   components: {
     UserAvatar,
     Tiles,
-    PasswordUpdateForm,
+    // PasswordUpdateForm,
     ProfileUpdateForm,
     HeroBar,
     TitleBar,
@@ -66,7 +66,7 @@ export default {
   },
   data () {
     return {
-      titleStack: ['Admin', 'Profile']
+      titleStack: ['Profile', this.$store.state.userName]
     }
   },
   computed: {

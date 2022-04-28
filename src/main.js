@@ -30,6 +30,19 @@ Vue.config.productionTip = false
 
 Vue.use(Buefy)
 
+Vue.mixin({
+  methods: {
+    CheckIsAdmin: function () {
+      if (this.$store.state?.user?.role) {
+        if (this.$store.state.user.role === 'admin') return true
+      } else {
+        console.error('Need role to do this action!')
+        return false
+      }
+    }
+  }
+})
+
 new Vue({
   router,
   store,

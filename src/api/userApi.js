@@ -1,5 +1,4 @@
 import axiosClient from './axiosClient'
-import axios from 'axios'
 
 const userApi = {
   getAll (params) {
@@ -16,12 +15,10 @@ const userApi = {
   },
   add (newUser) {
     const url = '/users'
-    console.log({ data: newUser })
     return axiosClient.post(url, newUser)
   },
   edit (id, user) {
     const url = '/users/' + id
-    console.log(url, user)
     return axiosClient({
       method: 'patch',
       url: url,

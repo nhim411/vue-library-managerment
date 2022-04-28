@@ -84,7 +84,9 @@ export default {
       userApi.getUser({ name: this.form.username })
         .then((data) => {
           if (data && data instanceof Array && data.length > 0) {
+            console.log('login response:', data)
             this.$store.commit('user', data[0])
+            this.$store.commit('setUser', data[0])
             this.$buefy.snackbar.open({
               message: 'Đăng nhập thành công',
               queue: false
