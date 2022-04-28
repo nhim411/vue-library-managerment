@@ -1,5 +1,8 @@
 <template>
-  <li :class="{ 'is-active': isDropdownActive }">
+  <li
+    v-if="isShow"
+    :class="{ 'is-active': isDropdownActive }"
+  >
     <component
       :is="componentIs"
       :to="item.to"
@@ -66,6 +69,14 @@ export default {
     },
     dropdownIcon () {
       return this.isDropdownActive ? 'minus' : 'plus'
+    },
+    isShow () {
+      if (this.item.authRequired) {
+        if (this.CheckIsAdmin()) {
+          return true
+        }
+        return false
+      } else { return true }
     }
   },
   methods: {
