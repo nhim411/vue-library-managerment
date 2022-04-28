@@ -62,7 +62,6 @@
 </template>
 
 <script>
-import FilePicker from '@/components/FilePicker.vue'
 import CardComponent from '@/components/CardComponent.vue'
 import userApi from '@/api/userApi'
 

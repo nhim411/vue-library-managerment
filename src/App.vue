@@ -24,14 +24,14 @@ export default {
     return {
       menu
     }
-  },
-  created () {
-    this.$store.commit('user', {
-      name: 'Nam',
-      email: 'nam@example.com',
-      avatar: 'https://avatars.dicebear.com/v2/gridy/John-Doe.svg',
-      role: 'admin'
-    })
   }
+  // created () {
+  //   this.$store.commit('user', {
+  //     name: 'Nam',
+  //     email: 'nam@example.com',
+  //     avatar: 'https://avatars.dicebear.com/v2/gridy/John-Doe.svg',
+  //     role: 'admin'
+  //   })
+  // }
 }
 </script>

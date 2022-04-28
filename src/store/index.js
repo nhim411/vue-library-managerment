@@ -14,6 +14,7 @@ const store = new Vuex.Store({
     userRole: null,
     userId: null,
     users: null,
+    user: null,
 
     // Book
     books: null,
@@ -83,10 +84,17 @@ const store = new Vuex.Store({
     },
 
     removeUserInfo (state) {
+    /* User */
       state.userName = null
       state.userEmail = null
       state.userAvatar = null
+      state.userRole = null
+      state.userId = null
+      state.users = null
       state.user = null
+
+      // Book
+      state.books = null
     },
 
     deleteUser (state, payload) {
