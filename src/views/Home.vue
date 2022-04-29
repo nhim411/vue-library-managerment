@@ -10,71 +10,30 @@
           class="tile is-child"
           type="is-primary"
           icon="account-multiple"
-          :number="512"
-          label="Clients"
+          :number="$store.getters.userTotal || 0"
+          label="Users"
         />
         <card-widget
           class="tile is-child"
           type="is-info"
-          icon="cart-outline"
-          :number="7770"
-          prefix="$"
-          label="Sales"
-        />
-        <card-widget
-          class="tile is-child"
-          type="is-success"
-          icon="chart-timeline-variant"
-          :number="256"
-          suffix="%"
-          label="Performance"
+          icon="book"
+          :number="$store.getters.bookTotal || 0"
+          label="Books"
         />
       </tiles>
-
-      <card-component
-        title="Performance"
-        icon="finance"
-        header-icon="reload"
-        @header-icon-click="fillChartData"
-      >
-        <div
-          v-if="chartData"
-          class="chart-area"
-        >
-          <line-chart
-            :chart-data="chartData"
-            :chart-options="{responsive: true}"
-            :style="{height: '100%'}"
-          />
-        </div>
-      </card-component>
-
-      <card-component
-        title="Clients"
-        class="has-table has-mobile-sort-spaced"
-      >
-        <clients-table-sample />
-      </card-component>
     </section>
   </div>
 </template>
 
 <script>
-import * as chartConfig from '@/components/Charts/chart.config.js'
 import TitleBar from '@/components/TitleBar.vue'
 import HeroBar from '@/components/HeroBar.vue'
 import Tiles from '@/components/Tiles.vue'
 import CardWidget from '@/components/CardWidget.vue'
-import CardComponent from '@/components/CardComponent.vue'
-import LineChart from '@/components/Charts/LineChart.vue'
-import ClientsTableSample from '@/components/ClientsTableSample.vue'
 
 export default {
   name: 'Home',
   components: {
-    ClientsTableSample,
-    LineChart,
-    CardComponent,
     CardWidget,
     Tiles,
     HeroBar,
@@ -84,19 +43,6 @@ export default {
     return {
       titleStack: ['Admin', 'Dashboard'],
       chartData: null
-    }
-  },
-  mounted () {
-    this.fillChartData()
-
-    this.$buefy.snackbar.open({
-      message: 'Welcome back',
-      queue: false
-    })
-  },
-  methods: {
-    fillChartData () {
-      this.chartData = chartConfig.sampleChartData()
     }
   }
 }
