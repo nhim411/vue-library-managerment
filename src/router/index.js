@@ -11,7 +11,8 @@ const routes = [
     // We combine it with defaultDocumentTitle set in `src/main.js` on router.afterEach hook
     meta: {
       title: 'Dashboard',
-      requiresAuth: true
+      requiresAuth: true,
+      requiresPermission: true
     },
     path: '/',
     name: 'home',
@@ -19,7 +20,9 @@ const routes = [
   },
   {
     meta: {
-      title: 'User Manager'
+      title: 'User Manager',
+      requiresPermission: true,
+      requiresAuth: true
     },
     path: '/users',
     name: 'UserManager',
@@ -31,29 +34,9 @@ const routes = [
   },
   {
     meta: {
-      title: 'Tables'
-    },
-    path: '/tables',
-    name: 'tables',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () =>
-      import(/* webpackChunkName: "tables" */ '@/views/Tables.vue')
-  },
-  {
-    meta: {
-      title: 'Forms',
+      title: 'Profile',
       requiresAuth: true
-    },
-    path: '/forms',
-    name: 'forms',
-    component: () =>
-      import(/* webpackChunkName: "forms" */ '@/views/Forms.vue')
-  },
-  {
-    meta: {
-      title: 'Profile'
+
     },
     path: '/profile',
     name: 'profile',
@@ -62,7 +45,9 @@ const routes = [
   },
   {
     meta: {
-      title: 'New Users'
+      title: 'New Users',
+      requiresPermission: true,
+      requireseAuth: true
     },
     path: '/users/new',
     name: 'users.new',
@@ -71,7 +56,9 @@ const routes = [
   },
   {
     meta: {
-      title: 'Edit User'
+      title: 'Edit User',
+      requiresPermission: true,
+      requireseAuth: true
     },
     path: '/users/:id',
     name: 'users.edit',
@@ -81,7 +68,8 @@ const routes = [
   },
   {
     meta: {
-      title: 'Book Manager'
+      title: 'Book Manager',
+      requireseAuth: true
     },
     path: '/books',
     name: 'BookManager',
@@ -93,7 +81,9 @@ const routes = [
   },
   {
     meta: {
-      title: 'New Book'
+      title: 'New Book',
+      requiresPermission: true,
+      requireseAuth: true
     },
     path: '/books/new',
     name: 'books.new',
@@ -102,7 +92,9 @@ const routes = [
   },
   {
     meta: {
-      title: 'Edit Book'
+      title: 'Edit Book',
+      requiresPermission: true,
+      requireseAuth: true
     },
     path: '/books/:id',
     name: 'books.edit',
@@ -158,7 +150,13 @@ router.beforeEach((to, from, next) => {
     if (!store.state.user) {
       next({ name: 'login' })
     } else {
-      next()
+      if (to.matched.some((record) => record.meta.requiresPermission)) {
+        if (store.state.user.role === 'admin') {
+          next()
+        } else {
+          next({ name: 'NotFound' })
+        }
+      } else { next() }
     }
   } else {
     next()

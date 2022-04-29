@@ -17,14 +17,6 @@
       >
         <b-icon icon="menu" />
       </a>
-      <div class="navbar-item has-control no-left-space-touch no-left-space-desktop-only">
-        <div class="control">
-          <input
-            class="input"
-            placeholder="Search everywhere..."
-          >
-        </div>
-      </div>
     </div>
     <div class="navbar-brand is-right">
       <a
@@ -61,29 +53,42 @@
                 icon="account"
                 custom-size="default"
               />
-              <span>My Profile</span>
+              <span>{{ $t('navbar.profile') }}</span>
             </router-link>
-            <a class="navbar-item">
-              <b-icon
-                icon="settings"
-                custom-size="default"
-              />
-              <span>Settings</span>
-            </a>
-            <a class="navbar-item">
-              <b-icon
-                icon="email"
-                custom-size="default"
-              />
-              <span>Messages</span>
-            </a>
             <hr class="navbar-divider">
-            <a class="navbar-item">
+            <a
+              class="navbar-item"
+              @click="logout"
+            >
               <b-icon
                 icon="logout"
                 custom-size="default"
               />
               <span>Log Out</span>
+            </a>
+          </div>
+        </nav-bar-menu>
+        <nav-bar-menu class="has-divider">
+          <b-icon
+            icon="translate"
+            custom-size="default"
+          />
+          <div
+            slot="dropdown"
+            class="navbar-dropdown"
+          >
+            <a
+              class="navbar-item"
+              @click="$i18n.locale = 'en'"
+            >
+              <span>English</span>
+            </a>
+            <hr class="navbar-divider">
+            <a
+              class="navbar-item"
+              @click="$i18n.locale = 'vi'"
+            >
+              <span>Tiếng việt</span>
             </a>
           </div>
         </nav-bar-menu>

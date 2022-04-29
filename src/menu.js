@@ -9,8 +9,15 @@ export default [
     {
       to: '/books',
       icon: 'book-lock',
-      label: 'Book Manager',
-      authRequired: true
+      label: 'Book Manager'
+      // authRequired: true
+
+    },
+    {
+      to: '/category',
+      icon: 'bookshelf',
+      label: 'Category Manager'
+      // authRequired: true
 
     }
   ],
@@ -18,7 +25,8 @@ export default [
     {
       to: '/',
       icon: 'desktop-mac',
-      label: 'Dashboard'
+      label: 'Dashboard',
+      authRequired: true
     }
   ],
   [

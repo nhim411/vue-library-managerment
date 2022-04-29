@@ -6,8 +6,10 @@ import Vue from 'vue'
 import Buefy from 'buefy'
 
 /* Router & Store */
-import router from './router'
-import store from './store'
+import router from '@/router/'
+import store from '@/store'
+
+import i18n from './lang' // internationalization
 
 /* Vue. Main component */
 import App from './App.vue'
@@ -30,20 +32,9 @@ Vue.config.productionTip = false
 
 Vue.use(Buefy)
 
-Vue.mixin({
-  methods: {
-    CheckIsAdmin: function () {
-      if (this.$store.state?.user?.role === 'admin') {
-        return true
-      } else {
-        return false
-      }
-    }
-  }
-})
-
 new Vue({
   router,
   store,
+  i18n,
   render: h => h(App)
 }).$mount('#app')

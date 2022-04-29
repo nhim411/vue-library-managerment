@@ -44,7 +44,6 @@
 </template>
 
 <script>
-import { mapState } from 'vuex'
 import CardComponent from '@/components/CardComponent.vue'
 import TitleBar from '@/components/TitleBar.vue'
 import HeroBar from '@/components/HeroBar.vue'
@@ -70,10 +69,12 @@ export default {
     }
   },
   computed: {
-    ...mapState([
-      'userName',
-      'userEmail'
-    ])
+    userName () {
+      return this.$store.state.user.name
+    },
+    userEmail () {
+      return this.$store.state.user.email
+    }
   }
 }
 </script>

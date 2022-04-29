@@ -49,6 +49,12 @@ const store = new Vuex.Store({
       return function (id) {
         return state.books.find(book => book.id === id)
       }
+    },
+    userTotal (state) {
+      return state.users.length
+    },
+    bookTotal (state) {
+      return state.books.length
     }
   },
   mutations: {

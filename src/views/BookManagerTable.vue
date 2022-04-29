@@ -65,33 +65,37 @@
       >
         {{ props.row.inventory }}
       </b-table-column>
-      <b-table-column
-        v-slot="props"
-        custom-key="actions"
-        cell-class="is-actions-cell"
-      >
-        <div class="buttons is-right no-wrap">
-          <router-link
-            :to="{ name: 'books.edit', params: { id: props.row.id } }"
-            class="button is-small is-info"
+      <template v-if="checkIsAdmin">
+        <b-table-column
+          v-slot="props"
+          custom-key="actions"
+          cell-class="is-actions-cell"
+        >
+          <div
+            class="buttons is-right no-wrap"
           >
-            <b-icon
-              icon="account-edit"
+            <router-link
+              :to="{ name: 'books.edit', params: { id: props.row.id } }"
+              class="button is-small is-info"
+            >
+              <b-icon
+                icon="account-edit"
+                size="is-small"
+              />
+            </router-link>
+            <b-button
+              type="is-danger"
               size="is-small"
-            />
-          </router-link>
-          <b-button
-            type="is-danger"
-            size="is-small"
-            @click.prevent="trashModalOpen(props.row)"
-          >
-            <b-icon
-              icon="trash-can"
-              size="is-small"
-            />
-          </b-button>
-        </div>
-      </b-table-column>
+              @click.prevent="trashModalOpen(props.row)"
+            >
+              <b-icon
+                icon="trash-can"
+                size="is-small"
+              />
+            </b-button>
+          </div>
+        </b-table-column>
+      </template>
 
       <section
         slot="empty"
@@ -114,6 +118,7 @@
 <script>
 import { mapGetters } from 'vuex'
 import ModalBox from '@/components/ModalBox.vue'
+import checkIsAdmin from '@/utils/permission'
 
 export default {
   name: 'BookManagerTable',
@@ -135,6 +140,7 @@ export default {
     }
   },
   computed: {
+    checkIsAdmin,
     paginated () {
       if (this.books) {
         return this.books.length > this.perPage

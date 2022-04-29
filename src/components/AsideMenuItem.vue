@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import checkIsAdmin from '@/utils/permission'
 export default {
   name: 'AsideMenuItem',
   components: {
@@ -61,6 +62,7 @@ export default {
     }
   },
   computed: {
+    checkIsAdmin: checkIsAdmin,
     componentIs () {
       return this.item.to ? 'router-link' : 'a'
     },
@@ -72,7 +74,7 @@ export default {
     },
     isShow () {
       if (this.item.authRequired) {
-        if (this.CheckIsAdmin()) {
+        if (this.checkIsAdmin) {
           return true
         }
         return false
@@ -88,5 +90,6 @@ export default {
       }
     }
   }
+
 }
 </script>
