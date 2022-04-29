@@ -7,7 +7,7 @@
       method="POST"
       @submit.prevent="submit"
     >
-      <b-field label="E-mail Address">
+      <b-field :label="$t('loginView.username')">
         <b-input
           v-model="form.username"
           name="username"
@@ -16,7 +16,7 @@
         />
       </b-field>
 
-      <b-field label="Password">
+      <b-field :label="$t('loginView.password')">
         <b-input
           v-model="form.password"
           type="password"
@@ -31,32 +31,48 @@
           type="is-black"
           class="is-thin"
         >
-          Remember me
+          {{ $t('loginView.remember') }}
         </b-checkbox>
       </b-field>
 
       <hr>
 
-      <b-field grouped>
-        <div class="control">
-          <b-button
-            native-type="submit"
-            type="is-black"
-            :loading="isLoading"
-          >
-            Login
-          </b-button>
-        </div>
-        <div class="control">
-          <b-button
-            to="/register"
-            class="button is-outlined is-black"
-            @click="register"
-          >
-            Register
-          </b-button>
-        </div>
-      </b-field>
+      <div>
+        <b-field
+          grouped
+        >
+          <div class="control">
+            <b-button
+              native-type="submit"
+              type="is-black"
+              :loading="isLoading"
+            >
+              {{ $t('loginView.login') }}
+            </b-button>
+          </div>
+          <div class="control">
+            <b-button
+              to="/register"
+              class="button is-outlined is-black"
+              @click="register"
+            >
+              {{ $t('loginView.register') }}
+            </b-button>
+          </div>
+          <div class="control ml-auto">
+            <b-button
+              to="/register"
+              class="button"
+              @click="toggleLanguage"
+            >
+              <b-icon
+                icon="translate"
+                custom-size="default"
+              />
+            </b-button>
+          </div>
+        </b-field>
+      </div>
     </form>
   </card-component>
 </template>
@@ -91,7 +107,7 @@ export default {
               message: 'Đăng nhập thành công',
               queue: false
             })
-            this.$router.push('/users')
+            this.$router.push('/books')
           } else {
             this.$buefy.snackbar.open({
               message: 'Đăng nhập thất bại',
@@ -111,6 +127,9 @@ export default {
     },
     register () {
       console.log('Form đăng kí')
+    },
+    toggleLanguage () {
+      this.$i18n.locale = this.$i18n.locale === 'vi' ? 'en' : 'vi'
     }
   }
 }

@@ -2,8 +2,9 @@
   <div>
     <title-bar :title-stack="titleStack" />
     <hero-bar>
-      Book Manager
+      {{ checkIsAdmin ? "Book Manager" : "Book List" }}
       <router-link
+        v-if="checkIsAdmin"
         slot="right"
         :to="heroRouterLinkTo"
         class="button"
@@ -14,7 +15,7 @@
     <section class="section is-main-section">
       <card-component
         class="has-table has-mobile-sort-spaced"
-        title="Book Manager"
+        :title="checkIsAdmin ? 'Book Manager' : 'Book list'"
         icon="account-multiple"
       >
         <book-manager-table />
@@ -29,6 +30,7 @@ import BookManagerTable from './BookManagerTable.vue'
 import CardComponent from '@/components/CardComponent.vue'
 import TitleBar from '@/components/TitleBar.vue'
 import HeroBar from '@/components/HeroBar.vue'
+import checkIsAdmin from '@/utils/permission'
 
 export default {
   name: 'BookManager',
@@ -40,8 +42,14 @@ export default {
   },
   data () {
     return {
-      titleStack: ['Admin', 'Book Manager'],
+      titleStack: [this.getTitleStack('Admin', 'Book'), this.getTitleStack('Book Manager', 'Book List')],
       heroRouterLinkTo: { name: 'books.new' }
+    }
+  },
+  computed: { checkIsAdmin: checkIsAdmin },
+  methods: {
+    getTitleStack (stack1, stack2) {
+      return checkIsAdmin ? stack1 : stack2
     }
   }
 }
