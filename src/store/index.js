@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import userApi from '@/api/userApi'
 import bookApi from '@/api/bookApi'
+import categoryApi from '@/api/categoryApi'
 
 Vue.use(Vuex)
 
@@ -18,6 +19,9 @@ const store = new Vuex.Store({
 
     // Book
     books: null,
+
+    // Book
+    categories: null,
 
     /* NavBar */
     isNavBarVisible: true,
@@ -50,11 +54,29 @@ const store = new Vuex.Store({
         return state.books.find(book => book.id === id)
       }
     },
+    categoryById (state) {
+      return function (id) {
+        return state.categories.find(category => category.id === id)
+      }
+    },
     userTotal (state) {
       return state.users.length
     },
     bookTotal (state) {
       return state.books.length
+    },
+    categories (state) {
+      return state.categories.map(category => {
+        let numberOfBook = 0
+        state.books.forEach(book => {
+          if (book.categoryId === category.id) numberOfBook += book.inventory
+        })
+        let retailQuantity = 0
+        state.books.forEach(book => {
+          if (book.categoryId === category.id) retailQuantity += book.retailQuantity
+        })
+        return { ...category, numberOfBook, retailQuantity }
+      })
     }
   },
   mutations: {
@@ -86,7 +108,9 @@ const store = new Vuex.Store({
     },
 
     setUser (state, payload) {
-      state.user = payload
+      const newUser = { ...state.user, ...payload }
+      if (newUser.password) { delete newUser.password }
+      state.user = newUser
     },
 
     removeUserInfo (state) {
@@ -117,6 +141,16 @@ const store = new Vuex.Store({
       const index = state.books.findIndex(book => book.id === payload)
       if (index >= 0) {
         state.books.splice(index, 1)
+      }
+    },
+    // Categories
+    setCategories (state, payload) {
+      state.categories = payload
+    },
+    deleteCategory (state, payload) {
+      const index = state.categories.findIndex(category => category.id === payload)
+      if (index >= 0) {
+        state.categories.splice(index, 1)
       }
     },
 
@@ -171,6 +205,17 @@ const store = new Vuex.Store({
     async deleteBook ({ commit }, payload) {
       commit('deleteBook', payload)
       bookApi.delete(payload)
+    },
+    // Category Manager
+    async fetchCategories ({ state, commit }) {
+      const categories = await categoryApi.getAll()
+      if (categories && categories instanceof Array && categories.length > 0) {
+        commit('setCategories', categories)
+      } else { throw new Error('Cannot Fetch Category List') }
+    },
+    async deleteCategory ({ commit }, payload) {
+      commit('deleteCategory', payload)
+      categoryApi.delete(payload)
     },
 
     asideDesktopOnlyToggle (store, payload = null) {
