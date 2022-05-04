@@ -64,7 +64,7 @@
                 icon="logout"
                 custom-size="default"
               />
-              <span>Log Out</span>
+              <span>{{ $t('navbar.logout') }}</span>
             </a>
           </div>
         </nav-bar-menu>

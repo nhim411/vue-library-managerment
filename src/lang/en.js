@@ -7,6 +7,7 @@ export default {
     register: 'Register'
   },
   navbar: {
-    profile: 'Profile'
+    profile: 'Profile',
+    logout: 'Logout'
   }
 }

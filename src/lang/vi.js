@@ -7,6 +7,7 @@ export default {
     register: 'Đăng kí'
   },
   navbar: {
-    profile: 'Trang cá nhân'
+    profile: 'Trang cá nhân',
+    logout: 'Đăng xuất'
   }
 }
