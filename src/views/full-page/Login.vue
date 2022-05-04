@@ -54,7 +54,7 @@
             <b-button
               to="/register"
               class="button is-outlined is-black"
-              @click="register"
+              @click="isComponentModalActive = true"
             >
               {{ $t('loginView.register') }}
             </b-button>
@@ -74,19 +74,38 @@
         </b-field>
       </div>
     </form>
+    <b-modal
+      v-model="isComponentModalActive"
+      has-modal-card
+      trap-focus
+      :destroy-on-hide="false"
+      aria-role="dialog"
+      aria-label="Example Modal"
+      close-button-aria-label="Close"
+      aria-modal
+    >
+      <template #default="props">
+        <ModalRegisterForm
+          v-bind="form"
+          @close="props.close"
+        />
+      </template>
+    </b-modal>
   </card-component>
 </template>
 
 <script>
 import CardComponent from '@/components/CardComponent.vue'
+import ModalRegisterForm from '@/views/full-page/ModalRegisterForm.vue'
 import userApi from '@/api/userApi'
 
 export default {
   name: 'Login',
-  components: { CardComponent },
+  components: { CardComponent, ModalRegisterForm },
   data () {
     return {
       isLoading: false,
+      isComponentModalActive: false,
       form: {
         username: 'admin',
         password: '111111',
