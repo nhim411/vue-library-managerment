@@ -1,4 +1,7 @@
 # [Library Managerment](https://github.com/nhim411/vue-library-managerment)
+Demo:
+- Front-end: [Library Managerment](https://vue-library-managerment.vercel.app/l)
+- Back-end: [Mock API Server](https://library-managerment-api.herokuapp.com/)
 
 ## Description
 Library Managerment Website
