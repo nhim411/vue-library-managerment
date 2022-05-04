@@ -99,9 +99,10 @@ export default {
   //   }
   // },
   created () {
-    this.form.userName = this.$store.state.useName
-    this.form.userEmail = this.$store.state.userEmail
+    this.form.userName = this.$store.state.user.name
+    this.form.userEmail = this.$store.state.user.email
   },
+
   methods: {
     submit () {
       this.isLoading = true
@@ -113,7 +114,8 @@ export default {
 
       userApi.edit(this.$store.state.user.id, newUser).then((res) => {
         this.$store.commit('user', newUser)
-        console.log('Profile Update respone:', res)
+        this.$store.commit('setUser', newUser)
+        console.log('Profile Update response:', res)
 
         this.$buefy.snackbar.open({
           message: 'Chỉnh sửa thông tin người dùng thành công',
@@ -127,5 +129,6 @@ export default {
       }).finally(() => { this.isLoading = false })
     }
   }
+
 }
 </script>

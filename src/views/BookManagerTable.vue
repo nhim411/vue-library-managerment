@@ -75,6 +75,15 @@
             class="buttons is-right no-wrap"
           >
             <router-link
+              :to="{ name: 'book.show', params: { id: props.row.id } }"
+              class="button is-small is-success"
+            >
+              <b-icon
+                icon="information-variant"
+                size="is-small"
+              />
+            </router-link>
+            <router-link
               :to="{ name: 'books.edit', params: { id: props.row.id } }"
               class="button is-small is-info"
             >
@@ -93,6 +102,27 @@
                 size="is-small"
               />
             </b-button>
+          </div>
+        </b-table-column>
+      </template>
+      <template v-else>
+        <b-table-column
+          v-slot="props"
+          custom-key="actions"
+          cell-class="is-actions-cell"
+        >
+          <div
+            class="buttons is-right no-wrap"
+          >
+            <router-link
+              :to="{ name: 'book.show', params: { id: props.row.id } }"
+              class="button is-small is-success"
+            >
+              <b-icon
+                icon="information-variant"
+                size="is-small"
+              />
+            </router-link>
           </div>
         </b-table-column>
       </template>
