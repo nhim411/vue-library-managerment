@@ -3,7 +3,7 @@
     <nav-bar />
     <aside-menu :menu="menu" />
     <router-view />
-    <footer-bar />
+    <!-- <footer-bar /> -->
   </div>
 </template>
 
@@ -24,14 +24,21 @@ export default {
     return {
       menu
     }
+  },
+  created () {
+    // fake data login
+    // const fakeUser = {
+    //   name: 'Nam',
+    //   email: 'nam@example.com',
+    //   avatar: 'https://avatars.dicebear.com/v2/gridy/John-Doe.svg',
+    //   role: 'admin'
+    // }
+    // this.$store.commit('user', fakeUser)
+    // this.$store.commit('setUser', fakeUser)
+
+    this.$store.dispatch('fetchBooks')
+    this.$store.dispatch('fetchUsers')
+    this.$store.dispatch('fetchCategories')
   }
-  // created () {
-  //   this.$store.commit('user', {
-  //     name: 'Nam',
-  //     email: 'nam@example.com',
-  //     avatar: 'https://avatars.dicebear.com/v2/gridy/John-Doe.svg',
-  //     role: 'admin'
-  //   })
-  // }
 }
 </script>

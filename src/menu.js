@@ -16,20 +16,16 @@ export default [
     {
       to: '/category',
       icon: 'bookshelf',
-      label: 'Category Manager'
-      // authRequired: true
+      label: 'Category Manager',
+      authRequired: true
 
-    }
-  ],
-  [
+    },
     {
       to: '/',
       icon: 'desktop-mac',
       label: 'Dashboard',
       authRequired: true
-    }
-  ],
-  [
+    },
     {
       to: '/profile',
       label: 'Profile',

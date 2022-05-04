@@ -2,7 +2,7 @@
   <div>
     <title-bar :title-stack="titleStack" />
     <hero-bar>
-      User Manager
+      {{ heroBarTitle }}
       <router-link
         slot="right"
         :to="heroRouterLinkTo"
@@ -17,9 +17,7 @@
         title="User Manager"
         icon="account-multiple"
       >
-        <user-manager-table
-          checkable
-        />
+        <user-manager-table />
       </card-component>
 
       <hr>
@@ -44,7 +42,8 @@ export default {
   data () {
     return {
       titleStack: ['Admin', 'Tables'],
-      heroRouterLinkTo: { name: 'users.new' }
+      heroRouterLinkTo: { name: 'users.new' },
+      heroBarTitle: 'User Manager'
     }
   }
 }

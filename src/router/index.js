@@ -43,11 +43,13 @@ const routes = [
     component: () =>
       import(/* webpackChunkName: "profile" */ '@/views/Profile.vue')
   },
+
+  // User manager
   {
     meta: {
       title: 'New Users',
       requiresPermission: true,
-      requireseAuth: true
+      requiresAuth: true
     },
     path: '/users/new',
     name: 'users.new',
@@ -58,7 +60,7 @@ const routes = [
     meta: {
       title: 'Edit User',
       requiresPermission: true,
-      requireseAuth: true
+      requiresAuth: true
     },
     path: '/users/:id',
     name: 'users.edit',
@@ -66,10 +68,12 @@ const routes = [
       import(/* webpackChunkName: "client-form" */ '@/views/CreateUserForm.vue'),
     props: true
   },
+
+  // Book manager
   {
     meta: {
       title: 'Book Manager',
-      requireseAuth: true
+      requiresAuth: true
     },
     path: '/books',
     name: 'BookManager',
@@ -81,9 +85,20 @@ const routes = [
   },
   {
     meta: {
+      title: 'Book',
+      requiresAuth: true
+    },
+    path: '/book/:id',
+    name: 'book.show',
+    component: () =>
+      import(/* webpackChunkName: "BookManagerForm" */ '@/views/BookCart.vue'),
+    props: true
+  },
+  {
+    meta: {
       title: 'New Book',
       requiresPermission: true,
-      requireseAuth: true
+      requiresAuth: true
     },
     path: '/books/new',
     name: 'books.new',
@@ -94,12 +109,51 @@ const routes = [
     meta: {
       title: 'Edit Book',
       requiresPermission: true,
-      requireseAuth: true
+      requiresAuth: true
     },
     path: '/books/:id',
     name: 'books.edit',
     component: () =>
       import(/* webpackChunkName: "BookManagerForm" */ '@/views/BookManagerForm.vue'),
+    props: true
+  },
+
+  // Category manager
+  {
+    meta: {
+      title: 'Category Manager',
+      requiresPermission: true,
+      requiresAuth: true
+    },
+    path: '/category',
+    name: 'CategoryManager',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () =>
+      import(/* webpackChunkName: "CategoryManager" */ '@/views/CategoryManager.vue')
+  },
+  {
+    meta: {
+      title: 'New Category',
+      requiresPermission: true,
+      requiresAuth: true
+    },
+    path: '/category/new',
+    name: 'category.new',
+    component: () =>
+      import(/* webpackChunkName: "CategoryManagerForm" */ '@/views/CategoryManagerForm.vue')
+  },
+  {
+    meta: {
+      title: 'Edit Category',
+      requiresPermission: true,
+      requiresAuth: true
+    },
+    path: '/category/:id',
+    name: 'category.edit',
+    component: () =>
+      import(/* webpackChunkName: "CategoryManagerForm" */ '@/views/CategoryManagerForm.vue'),
     props: true
   },
   {
@@ -147,6 +201,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
+    console.log(to.meta)
     if (!store.state.user) {
       next({ name: 'login' })
     } else {
