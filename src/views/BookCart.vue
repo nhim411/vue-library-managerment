@@ -20,24 +20,25 @@
         <div class="columns">
           <div
             class="column is-two-fifths"
-            style="padding: 50px;"
+            style="padding: 50px"
           >
             <figure class="image is-square">
               <img :src="book.image">
             </figure>
           </div>
-          <div class="column">
-            <div class="block">
-              <p class="title is-8">
-                {{ book.name }}
-              </p>
-            </div>
-            <div class="block subtitle is-9">
+          <div
+            class="column"
+            style="padding: 50px 0"
+          >
+            <p class="block title is-3">
+              {{ book.name }}
+            </p>
+            <div class="block subtitle is-5">
               <p>Tác giả: {{ book.author }}</p>
               <p>Thể loại: {{ book.category }}</p>
               <p>Nhà xuất bản: {{ book.publisher }}</p>
             </div>
-            <div class="block">
+            <div class="block subtitle is-6">
               <p>{{ book.description }}</p>
             </div>
 
