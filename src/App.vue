@@ -11,12 +11,11 @@
 import menu from '@/menu.js'
 import NavBar from '@/components/NavBar.vue'
 import AsideMenu from '@/components/AsideMenu.vue'
-import FooterBar from '@/components/FooterBar.vue'
+import checkIsAdmin from '@/utils/permission'
 
 export default {
   name: 'Home',
   components: {
-    FooterBar,
     AsideMenu,
     NavBar
   },
@@ -37,8 +36,10 @@ export default {
     // this.$store.commit('setUser', fakeUser)
 
     this.$store.dispatch('fetchBooks')
-    this.$store.dispatch('fetchUsers')
     this.$store.dispatch('fetchCategories')
+    if (checkIsAdmin) {
+      this.$store.dispatch('fetchUsers')
+    }
   }
 }
 </script>
