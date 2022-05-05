@@ -4,7 +4,7 @@
       <div class="">
         <div class="prose">
           <h1>404: Not Found</h1>
-          <p>You just hit a route that doesn't exist... the sadness 🙄</p><p><a href="/">Home</a></p>
+          <p>You just hit a route that doesn't exist... the sadness 🙄</p><p><a href="/books">Home</a></p>
         </div>
       </div>
     </section>

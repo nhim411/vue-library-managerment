@@ -160,7 +160,7 @@ export default {
       this.isModalActive = false
 
       this.$buefy.snackbar.open({
-        message: 'Confirmed',
+        message: 'Đã xoá',
         queue: false
       })
     },

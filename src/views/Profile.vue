@@ -2,26 +2,26 @@
   <div>
     <title-bar :title-stack="titleStack" />
     <hero-bar>
-      Profile
+      {{ $t('profile.herobar') }}
       <router-link
         slot="right"
-        to="/"
+        to="/books"
         class="button"
       >
-        Dashboard
+        {{ $t('profile.herolink') }}
       </router-link>
     </hero-bar>
     <section class="section is-main-section">
       <tiles>
         <profile-update-form class="tile is-child" />
         <card-component
-          title="Profile"
+          :title="$t('profile.title')"
           icon="account"
           class="tile is-child"
         >
           <user-avatar class="image has-max-width is-aligned-center" />
           <hr>
-          <b-field label="Name">
+          <b-field :label="$t('profile.labelname')">
             <b-input
               :value="userName"
               custom-class="is-static"
@@ -29,7 +29,7 @@
             />
           </b-field>
           <hr>
-          <b-field label="E-mail">
+          <b-field :label="$t('profile.labelemail')">
             <b-input
               :value="userEmail"
               custom-class="is-static"

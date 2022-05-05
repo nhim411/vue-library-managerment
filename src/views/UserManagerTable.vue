@@ -159,7 +159,7 @@ export default {
       this.$store.dispatch('deleteUser', id)
       this.isModalActive = false
       this.$buefy.snackbar.open({
-        message: 'Confirmed',
+        message: 'Đã xoá',
         queue: false
       })
     },

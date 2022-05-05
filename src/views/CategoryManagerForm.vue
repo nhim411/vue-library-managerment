@@ -86,7 +86,7 @@ export default {
     titleStack () {
       return [
         'Admin',
-        'Books',
+        'Category',
         this.isEditCategory ? 'Edit Category' : 'New Category'
       ]
     },
@@ -97,7 +97,7 @@ export default {
       return { name: 'CategoryManager' }
     },
     heroRouterLinkLabel () {
-      return 'Book Manager'
+      return 'Category Manager'
     },
     formCardTitle () {
       return this.isEditCategory ? 'Edit Category' : 'Add new Category'
@@ -129,6 +129,7 @@ export default {
             message: 'Sửa thông tin sách thành công',
             queue: false
           })
+          this.$store.dispatch('fetchCategories')
         }).catch(e => {
           this.$buefy.snackbar.open({
             message: 'Lỗi: không thể sửa thông tin sách',
@@ -147,12 +148,12 @@ export default {
         }
         categoryApi.add(newCategory).then((res) => {
           this.$buefy.snackbar.open({
-            message: 'Thêm sách mới thành công',
+            message: 'Thêm bộ sưu tập mới mới thành công',
             queue: false
           })
         }).catch(e => {
           this.$buefy.snackbar.open({
-            message: 'Lỗi: không thể thêm sách',
+            message: 'Lỗi: không thể thêm bộ sưu tập',
             queue: false
           })
         }).finally(() => { this.isLoading = false })

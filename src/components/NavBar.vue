@@ -154,7 +154,7 @@ export default {
     },
     logout () {
       this.$buefy.snackbar.open({
-        message: 'Log out sucess',
+        message: 'Đã đăng xuất',
         queue: false
       })
       this.$store.dispatch('logOut')

@@ -54,19 +54,22 @@
         icon="account-multiple"
       >
         <b-carousel-list
-          v-model="test"
           :data="books"
           :items-to-show="5"
         >
           <template #item="list">
             <div class="card">
-              <div class="card-image">
+              <div
+                class="card-image"
+                style="padding: 10px;"
+              >
                 <figure class="image is-1by1">
-                  <a @click="$router.push({ name: 'book.show', params: { id: book.id } })"><img :src="list.image"></a>
+                  <a @click="$router.push({ name: 'book.show', params: { id: list.id } })"><img :src="list.image"></a>
                 </figure>
               </div>
               <div
                 class="card-content"
+                style="padding: 10px"
               >
                 <div class="content">
                   <p class="title is-6 line-wrap">
@@ -75,7 +78,7 @@
                   <p class="subtitle is-7 line-wrap">
                     {{ list.author }}
                   </p>
-                  <b-field grouped>
+                  <!-- <b-field grouped>
                     <p
                       class="control"
                       style="margin-left: auto"
@@ -90,7 +93,7 @@
                         />
                       </router-link>
                     </p>
-                  </b-field>
+                  </b-field> -->
                 </div>
               </div>
             </div>

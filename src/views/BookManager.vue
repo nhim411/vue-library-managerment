@@ -46,10 +46,10 @@ export default {
       heroRouterLinkTo: { name: 'books.new' }
     }
   },
-  computed: { checkIsAdmin: checkIsAdmin },
+  computed: { checkIsAdmin },
   methods: {
     getTitleStack (stack1, stack2) {
-      return checkIsAdmin ? stack1 : stack2
+      return this.checkIsAdmin ? stack1 : stack2
     }
   }
 }
