@@ -39,7 +39,16 @@ const store = new Vuex.Store({
       return state.users
     },
     books (state) {
-      return state.books
+      return state.books.map(book => {
+        let categoryName
+        if (book.categoryId) {
+          state.categories.forEach(category => {
+            if (Object.values(category).includes(book.categoryId)) categoryName = category.name
+          })
+          book.category = categoryName
+        }
+        return book
+      })
     },
     user (state) {
       return state.user
