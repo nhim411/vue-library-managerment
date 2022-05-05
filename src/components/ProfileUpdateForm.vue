@@ -13,7 +13,7 @@
       <hr> -->
       <b-field
         horizontal
-        label="Name"
+        :label="$t('profile.labelname')"
         message="Required. Your name"
       >
         <b-input
@@ -24,7 +24,7 @@
       </b-field>
       <b-field
         horizontal
-        label="E-mail"
+        :label="$t('profile.labelemail')"
         message="Required. Your e-mail"
       >
         <b-input
@@ -32,6 +32,17 @@
           name="email"
           type="email"
           required
+        />
+      </b-field>
+      <b-field
+        horizontal
+        :label="$t('profile.labelpassword')"
+        message="Your password"
+      >
+        <b-input
+          v-model="form.userPassword"
+          name="password"
+          type="password"
         />
       </b-field>
       <hr>
@@ -76,7 +87,8 @@ export default {
       isLoading: false,
       form: {
         userName: null,
-        userEmail: null
+        userEmail: null,
+        userPassword: ''
       }
     }
   },
@@ -109,7 +121,13 @@ export default {
 
       const newUser = {
         email: this.form.userEmail,
-        name: this.form.userName
+        name: this.form.userName,
+        password: this.form.userPassword
+      }
+      for (const property in newUser) {
+        if (newUser[property] === '') {
+          delete newUser[property]
+        }
       }
 
       userApi.edit(this.$store.state.user.id, newUser).then((res) => {

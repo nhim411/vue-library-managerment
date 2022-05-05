@@ -9,5 +9,13 @@ export default {
   navbar: {
     profile: 'Profile',
     logout: 'Logout'
+  },
+  profile: {
+    herobar: 'Profile',
+    herolink: 'Dashboard',
+    title: 'Profile',
+    labelname: 'Name',
+    labelemail: 'E-mail',
+    labelpassword: 'Password'
   }
 }
