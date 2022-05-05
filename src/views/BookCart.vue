@@ -69,7 +69,7 @@
               </div>
               <div
                 class="card-content"
-                style="padding: 10px"
+                style="padding: 10px 0"
               >
                 <div class="content">
                   <p class="title is-6 line-wrap">

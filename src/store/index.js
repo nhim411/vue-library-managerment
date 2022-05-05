@@ -69,10 +69,10 @@ const store = new Vuex.Store({
       }
     },
     userTotal (state) {
-      return state.users.length
+      return state.users.length || 0
     },
     bookTotal (state) {
-      return state.books.length
+      return state.books.length || 0
     },
     categories (state) {
       return state.categories.map(category => {

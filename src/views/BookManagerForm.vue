@@ -208,7 +208,6 @@ export default {
             message: 'Sửa thông tin sách thành công',
             queue: false
           })
-          this.$store.dispatch('fetchBooks')
         }).catch(e => {
           this.$buefy.snackbar.open({
             message: 'Lỗi: không thể sửa thông tin sách',
@@ -231,7 +230,6 @@ export default {
             message: 'Thêm sách mới thành công',
             queue: false
           })
-          this.$store.dispatch('fetchBooks')
         }).catch(e => {
           this.$buefy.snackbar.open({
             message: 'Lỗi: không thể thêm sách',

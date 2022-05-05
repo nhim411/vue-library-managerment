@@ -180,7 +180,6 @@ export default {
             message: 'Chỉnh sửa thành công',
             queue: false
           })
-          this.$store.dispatch('fetchUsers')
         })
       } else {
         this.isLoading = true
@@ -196,7 +195,6 @@ export default {
             message: 'Thêm người dùng thành công',
             queue: false
           })
-          this.$store.dispatch('fetchUsers')
         }).catch(e => {
           this.$buefy.snackbar.open({
             message: 'Lỗi: không thể thêm user',

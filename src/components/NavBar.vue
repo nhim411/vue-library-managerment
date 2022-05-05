@@ -56,16 +56,6 @@
               <span>{{ $t('navbar.profile') }}</span>
             </router-link>
             <hr class="navbar-divider">
-            <a
-              class="navbar-item"
-              @click="logout"
-            >
-              <b-icon
-                icon="logout"
-                custom-size="default"
-              />
-              <span>{{ $t('navbar.logout') }}</span>
-            </a>
           </div>
         </nav-bar-menu>
         <nav-bar-menu class="has-divider">
@@ -101,7 +91,7 @@
             icon="logout"
             custom-size="default"
           />
-          <span>Log out</span>
+          <span>{{ $t('navbar.logout') }}</span>
         </a>
       </div>
     </div>
