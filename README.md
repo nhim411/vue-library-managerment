@@ -65,3 +65,54 @@ npm run lint
 ```
 npm run lint:fix
 ```
+
+#### Folder structure
+
+```
+api-collection/
+src/
+┣ api/
+┃ ┣ axiosClient.js
+┃ ┣ bookApi.js
+┃ ┣ categoryApi.js
+┃ ┗ userApi.js
+┣ components/
+┃ ┣ NavBar.vue
+┃ ┣ NavBarMenu.vue
+┃ ┣ Notification.vue
+┃ ┣ ProfileUpdateForm.vue
+┃ ┣ Tiles.vue
+┃ ┣ TitleBar.vue
+┃ ┗ UserAvatar.vue
+┣ lang/
+┃ ┣ en.js
+┃ ┣ index.js
+┃ ┗ vi.js
+┣ router/
+┃ ┗ index.js
+┣ store/
+┃ ┗ index.js
+┣ utils/
+┃ ┗ permission.js
+┣ views/
+┃ ┣ full-page/
+┃ ┃ ┣ Login.vue
+┃ ┃ ┗ ModalRegisterForm.vue
+┃ ┣ BookCart.vue
+┃ ┣ BookManager.vue
+┃ ┣ BookManagerForm.vue
+┃ ┣ BookManagerTable.vue
+┃ ┣ CategoryManager.vue
+┃ ┣ CategoryManagerForm.vue
+┃ ┣ CategoryManagerTable.vue
+┃ ┣ CreateUserForm.vue
+┃ ┣ FullPage.vue
+┃ ┣ Home.vue
+┃ ┣ NotFound.vue
+┃ ┣ Profile.vue
+┃ ┣ UserManager.vue
+┃ ┗ UserManagerTable.vue
+┣ App.vue
+┣ main.js
+┗ menu.js
+```
