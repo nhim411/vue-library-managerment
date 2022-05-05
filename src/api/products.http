@@ -1,5 +1,0 @@
-//get all
-GET https://fakestoreapi.com/products
-###
-//Get a single product
-https://fakestoreapi.com/products/1

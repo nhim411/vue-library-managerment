@@ -1,5 +1,5 @@
-@baseURL = http://localhost:3000/
-@resourceName = products
+@baseURL = http://localhost:3030/api
+@resourceName = books
 
 
 # @name getAll
