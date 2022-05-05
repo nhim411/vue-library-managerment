@@ -64,11 +64,20 @@
             message="Category"
             horizontal
           >
-            <b-input
-              v-model="form.category"
+            <b-select
+              v-model="form.categoryId"
+              placeholder="Select a category"
               message="Book's Category"
               required
-            />
+            >
+              <option
+                v-for="(category, index) in categories"
+                :key="index"
+                :value="category.id"
+              >
+                {{ category.name }}
+              </option>
+            </b-select>
           </b-field>
           <b-field
             label="Description"
@@ -130,12 +139,13 @@ export default {
   data () {
     return {
       isLoading: false,
+      categories: this.$store.state.categories,
       form: {
         name: 'Cây cam ngọt của tôi',
         author: 'Hoài Nam',
         publisher: 'Nhã Nam',
         description: 'đây là một cuốn sách tuyệt vời',
-        category: 'Tiểu thuyết',
+        categoryId: null,
         inventory: 10
       },
       isEditBook: false,
@@ -168,10 +178,10 @@ export default {
     if (this.isEditBook) {
       const book = this.$store.getters.bookById(this.$route.params.id)
       if (book) {
+        console.log(book)
         this.form.name = book.name
         this.form.author = book.author
-        this.form.category = book.category
-        this.form.category = book.category
+        this.form.categoryId = book.categoryId
         this.form.publisher = book.publisher
         this.form.inventory = book.inventory
       }
@@ -184,7 +194,7 @@ export default {
           name: this.form.name,
           author: this.form.author,
           publisher: this.form.publisher,
-          category: this.form.category,
+          categoryId: this.form.categoryId,
           description: this.form.description,
           inventory: this.form.inventory
         }
@@ -198,6 +208,7 @@ export default {
             message: 'Sửa thông tin sách thành công',
             queue: false
           })
+          this.$store.dispatch('fetchBooks')
         }).catch(e => {
           this.$buefy.snackbar.open({
             message: 'Lỗi: không thể sửa thông tin sách',
@@ -210,7 +221,8 @@ export default {
           name: this.form.name,
           author: this.form.author,
           publisher: this.form.publisher,
-          category: this.form.category,
+          category: this.categories[this.form.categoryId],
+          categoryId: this.form.categoryId,
           description: this.form.description,
           inventory: this.form.inventory
         }
@@ -219,6 +231,7 @@ export default {
             message: 'Thêm sách mới thành công',
             queue: false
           })
+          this.$store.dispatch('fetchBooks')
         }).catch(e => {
           this.$buefy.snackbar.open({
             message: 'Lỗi: không thể thêm sách',

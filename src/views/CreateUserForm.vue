@@ -175,7 +175,13 @@ export default {
           role: this.form.role,
           email: this.form.email
         }
-        userApi.edit(this.$route.params.id, newUser).then(data => console.log(data))
+        userApi.edit(this.$route.params.id, newUser).then(data => console.log(data)).then((res) => {
+          this.$buefy.snackbar.open({
+            message: 'Chỉnh sửa thành công',
+            queue: false
+          })
+          this.$store.dispatch('fetchUsers')
+        })
       } else {
         this.isLoading = true
         const newUser = {
@@ -190,6 +196,7 @@ export default {
             message: 'Thêm người dùng thành công',
             queue: false
           })
+          this.$store.dispatch('fetchUsers')
         }).catch(e => {
           this.$buefy.snackbar.open({
             message: 'Lỗi: không thể thêm user',
