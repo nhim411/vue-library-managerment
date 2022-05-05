@@ -1,5 +1,5 @@
 <template>
-  <form action="">
+  <form @submit.prevent="register">
     <div
       class="modal-card"
       style="width: auto"
@@ -17,16 +17,16 @@
       <section class="modal-card-body">
         <b-field label="Username">
           <b-input
+            v-model="username"
             type="text"
-            :value="username"
             placeholder="Your email"
             required
           />
         </b-field>
         <b-field label="Email">
           <b-input
+            v-model="email"
             type="email"
-            :value="email"
             placeholder="Your email"
             required
           />
@@ -34,8 +34,8 @@
 
         <b-field label="Password">
           <b-input
+            v-model="password"
             type="password"
-            :value="password"
             password-reveal
             placeholder="Your password"
             required
@@ -50,7 +50,7 @@
         <b-button
           label="Register"
           type="is-primary"
-          @click="register"
+          native-type="submit"
         />
       </footer>
     </div>
@@ -62,9 +62,12 @@ import userApi from '@/api/userApi'
 
 export default {
   name: 'ModalRegisterForm',
-  props: ['username', 'password'],
   data () {
-    return { email: 'user@user' }
+    return {
+      email: '',
+      username: '',
+      password: ''
+    }
   },
   methods: {
     register () {
@@ -80,6 +83,10 @@ export default {
           message: 'Đăng kí thành công',
           queue: false
         })
+        this.email = ''
+        this.username = ''
+        this.password = ''
+        this.$emit('close')
       }).catch(e => {
         this.$buefy.snackbar.open({
           message: 'Đăng kí thất bại',

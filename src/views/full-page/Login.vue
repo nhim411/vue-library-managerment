@@ -86,7 +86,6 @@
     >
       <template #default="props">
         <ModalRegisterForm
-          v-bind="form"
           @close="props.close"
         />
       </template>
@@ -98,6 +97,7 @@
 import CardComponent from '@/components/CardComponent.vue'
 import ModalRegisterForm from '@/views/full-page/ModalRegisterForm.vue'
 import userApi from '@/api/userApi'
+import checkIsAdmin from '@/utils/permission'
 
 export default {
   name: 'Login',
@@ -107,11 +107,27 @@ export default {
       isLoading: false,
       isComponentModalActive: false,
       form: {
-        username: 'admin',
-        password: '111111',
-        remember: false
+        username: '',
+        password: '',
+        remember: true
       }
     }
+  },
+  created () {
+    // fake data login
+    const fakeUser = {
+      name: 'Nam',
+      email: 'nam@example.com',
+      avatar: 'https://avatars.dicebear.com/v2/gridy/John-Doe.svg',
+      role: 'admin'
+    }
+    this.$store.commit('user', fakeUser)
+    this.$store.commit('setUser', fakeUser)
+
+    this.$store.dispatch('fetchBooks')
+    this.$store.dispatch('fetchCategories')
+    this.$store.dispatch('fetchUsers')
+    this.$router.push({ name: 'BookManager' })
   },
   methods: {
     submit () {
