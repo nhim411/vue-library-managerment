@@ -74,6 +74,7 @@
       >
         <div class="buttons is-right no-wrap">
           <router-link
+            v-if="props.row.role !== 'admin'"
             :to="{ name: 'users.edit', params: { id: props.row.id } }"
             class="button is-small is-info"
           >
@@ -83,6 +84,7 @@
             />
           </router-link>
           <b-button
+            v-if="props.row.role !== 'admin'"
             type="is-danger"
             size="is-small"
             @click.prevent="trashModalOpen(props.row)"
