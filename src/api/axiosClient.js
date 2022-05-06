@@ -7,7 +7,7 @@ import queryString from 'query-string'
 // config` for the full list of configs
 
 const axiosClient = axios.create({
-  baseURL: 'http://localhost:3030/api',
+  baseURL: 'http://localhost:8000',
   timeout: 5000,
   paramsSerializer: (params) => queryString.stringify(params)
 })
@@ -27,9 +27,6 @@ error => {
 axiosClient.interceptors.response.use(
   (response) => {
     console.log('response:', response)
-    if (response && response.data && response.data.data) {
-      return response.data.data
-    }
     return response
   },
   (error) => {

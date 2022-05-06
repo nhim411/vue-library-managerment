@@ -1,4 +1,4 @@
-@baseURL = http://localhost:3030/api
+@baseURL = http://localhost:3000
 @resourceName = users
 
 #Categories
@@ -34,4 +34,24 @@ Content-Type: application/json
 
 {
   "name": "Tủ lạnh cũ"
+}
+
+###
+
+# @name add new User
+POST http://localhost:3000/signup
+Content-Type: application/json
+
+{
+  "email": "user1222@user.com",
+  "password": "111111"
+}
+###
+# @name add new User
+POST http://localhost:3000/login
+Content-Type: application/json
+
+{
+  "email": "user1222@user.com",
+  "password": "111111"
 }

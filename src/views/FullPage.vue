@@ -3,7 +3,7 @@
     <div class="hero-body">
       <div class="container">
         <div class="columns is-centered">
-          <div class="column is-two-fifths">
+          <div class="column is-6-tablet is-5-desktop">
             <router-view />
           </div>
         </div>

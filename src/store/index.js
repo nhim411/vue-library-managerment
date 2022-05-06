@@ -124,16 +124,6 @@ const store = new Vuex.Store({
 
     removeUserInfo (state) {
     /* User */
-      state.userName = null
-      state.userEmail = null
-      state.userAvatar = null
-      state.userRole = null
-      state.userId = null
-      state.users = null
-      state.user = null
-
-      // Book
-      state.books = null
     },
 
     deleteUser (state, payload) {
@@ -201,14 +191,22 @@ const store = new Vuex.Store({
     },
     async fetchUsers ({ state, commit }) {
       const users = await userApi.getAll()
-      if (users && users instanceof Array && users.length > 0) {
-        commit('setUsers', users)
-      } else { throw new Error('Cannot Fetch User List') }
+      if (users && users.data instanceof Array && users.data.length > 0) {
+        commit('setUsers', users.data)
+      } else { throw new Error('Cannot Fetch Users List') }
+    },
+    async getUserById ({ state, commit }, payload) {
+      const user = await userApi.getUserById(payload)
+      console.log({ user })
+      if (user && user.data.id) {
+        commit('setUser', user.data)
+        commit('user', user.data)
+      } else { throw new Error('Cannot Fetch User By Id') }
     },
     async fetchBooks ({ state, commit }) {
       const books = await bookApi.getAll()
-      if (books && books instanceof Array && books.length > 0) {
-        commit('setBooks', books)
+      if (books && books.data instanceof Array && books.data.length > 0) {
+        commit('setBooks', books.data)
       } else { throw new Error('Cannot Fetch Book List') }
     },
     async deleteBook ({ commit }, payload) {
@@ -218,8 +216,8 @@ const store = new Vuex.Store({
     // Category Manager
     async fetchCategories ({ state, commit }) {
       const categories = await categoryApi.getAll()
-      if (categories && categories instanceof Array && categories.length > 0) {
-        commit('setCategories', categories)
+      if (categories && categories.data instanceof Array && categories.data.length > 0) {
+        commit('setCategories', categories.data)
       } else { throw new Error('Cannot Fetch Category List') }
     },
     async deleteCategory ({ commit }, payload) {

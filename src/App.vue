@@ -1,9 +1,16 @@
 <template>
   <div id="app">
-    <nav-bar />
-    <aside-menu :menu="menu" />
-    <router-view />
+    <template v-if="!isLoading">
+      <nav-bar />
+      <aside-menu :menu="menu" />
+      <router-view />
+    </template>
     <!-- <footer-bar /> -->
+    <b-loading
+      v-model="isLoading"
+      :is-full-page="true"
+      :can-cancel="true"
+    />
   </div>
 </template>
 
@@ -11,7 +18,7 @@
 import menu from '@/menu.js'
 import NavBar from '@/components/NavBar.vue'
 import AsideMenu from '@/components/AsideMenu.vue'
-import checkIsAdmin from '@/utils/permission'
+import storage from '@/utils/localStorage'
 
 export default {
   name: 'Home',
@@ -21,10 +28,11 @@ export default {
   },
   data () {
     return {
-      menu
+      menu,
+      isLoading: true
     }
   },
-  created () {
+  async created () {
     // fake data login
     // const fakeUser = {
     //   name: 'Nam',
@@ -34,11 +42,13 @@ export default {
     // }
     // this.$store.commit('user', fakeUser)
     // this.$store.commit('setUser', fakeUser)
-
-    this.$store.dispatch('fetchBooks')
-    this.$store.dispatch('fetchCategories')
-    if (checkIsAdmin) {
-      this.$store.dispatch('fetchUsers')
+    if (storage.get('token')) {
+      const userId = storage.get('user')
+      await this.$store.dispatch('getUserById', userId)
+      await this.$store.dispatch('fetchBooks')
+      await this.$store.dispatch('fetchCategories')
+      await this.$store.dispatch('fetchUsers')
+      this.isLoading = false
     }
   }
 }

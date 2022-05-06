@@ -55,7 +55,6 @@
               />
               <span>{{ $t('navbar.profile') }}</span>
             </router-link>
-            <hr class="navbar-divider">
           </div>
         </nav-bar-menu>
         <nav-bar-menu class="has-divider">
@@ -102,6 +101,7 @@
 import { mapState } from 'vuex'
 import NavBarMenu from '@/components/NavBarMenu.vue'
 import UserAvatar from '@/components/UserAvatar.vue'
+import storage from '@/utils/localStorage'
 
 export default {
   name: 'NavBar',
@@ -143,10 +143,13 @@ export default {
       this.isMenuActive = !this.isMenuActive
     },
     logout () {
+      storage.delete('token')
+      storage.delete('user')
       this.$buefy.snackbar.open({
         message: 'Đã đăng xuất',
         queue: false
       })
+
       this.$store.dispatch('logOut')
       this.$router.push({ name: 'login' })
     }

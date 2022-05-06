@@ -97,7 +97,8 @@
 import CardComponent from '@/components/CardComponent.vue'
 import ModalRegisterForm from '@/views/full-page/ModalRegisterForm.vue'
 import userApi from '@/api/userApi'
-import checkIsAdmin from '@/utils/permission'
+import storage from '@/utils/localStorage'
+// import checkIsAdmin from '@/utils/permission'
 
 export default {
   name: 'Login',
@@ -107,8 +108,8 @@ export default {
       isLoading: false,
       isComponentModalActive: false,
       form: {
-        username: '',
-        password: '',
+        username: 'admin@admin',
+        password: '111111',
         remember: true
       }
     }
@@ -131,13 +132,22 @@ export default {
   },
   methods: {
     submit () {
-      this.isLoading = true
-      userApi.getUser({ name: this.form.username })
-        .then((data) => {
-          if (data && data instanceof Array && data.length > 0) {
-            console.log('login response:', data)
-            this.$store.commit('user', data[0])
-            this.$store.commit('setUser', data[0])
+      userApi.login({ email: this.form.username, password: this.form.password })
+        .then(res => {
+          if (res.status === 200) {
+            storage.set('token', res.data.access_token)
+            return userApi.getUser({ email: this.form.username })
+          } else {
+            this.$buefy.snackbar.open({
+              message: 'Đăng nhập thất bại',
+              queue: false
+            })
+          }
+        }).then((res) => {
+          if (res && res.data instanceof Array && res.data.length > 0) {
+            storage.set('user', res.data[0].id)
+            this.$store.commit('user', res.data[0])
+            this.$store.commit('setUser', res.data[0])
             this.$buefy.snackbar.open({
               message: 'Đăng nhập thành công',
               queue: false
@@ -149,19 +159,36 @@ export default {
               queue: false
             })
           }
-        }).catch(e => {
-          console.log('cannot get user', e)
-          this.$buefy.snackbar.open({
-            message: 'Đăng nhập thất bại, không thể truy cập server',
-            queue: false
-          })
         })
-        .finally(() => {
-          this.isLoading = false
-        })
-    },
-    register () {
-      console.log('Form đăng kí')
+        .catch(e => console.log(e))
+      // this.isLoading = true
+      // userApi.getUser({ name: this.form.username })
+      //   .then((data) => {
+      //     if (data && data instanceof Array && data.length > 0) {
+      //       console.log('login response:', data)
+      //       this.$store.commit('user', data[0])
+      //       this.$store.commit('setUser', data[0])
+      //       this.$buefy.snackbar.open({
+      //         message: 'Đăng nhập thành công',
+      //         queue: false
+      //       })
+      //       this.$router.push('/books')
+      //     } else {
+      //       this.$buefy.snackbar.open({
+      //         message: 'Đăng nhập thất bại',
+      //         queue: false
+      //       })
+      //     }
+      //   }).catch(e => {
+      //     console.log('cannot get user', e)
+      //     this.$buefy.snackbar.open({
+      //       message: 'Đăng nhập thất bại, không thể truy cập server',
+      //       queue: false
+      //     })
+      //   })
+      //   .finally(() => {
+      //     this.isLoading = false
+      //   })
     },
     toggleLanguage () {
       this.$i18n.locale = this.$i18n.locale === 'vi' ? 'en' : 'vi'

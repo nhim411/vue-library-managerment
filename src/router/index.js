@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '@/views/Home.vue'
 import store from '@/store'
+import storage from '@/utils/localStorage'
 
 Vue.use(VueRouter)
 
@@ -201,8 +202,7 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   if (to.matched.some((record) => record.meta.requiresAuth)) {
-    console.log(to.meta)
-    if (!store.state.user) {
+    if (!storage.get('token')) {
       next({ name: 'login' })
     } else {
       if (to.matched.some((record) => record.meta.requiresPermission)) {
