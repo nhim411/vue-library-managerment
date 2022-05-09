@@ -6,7 +6,7 @@ Demo:
 Source code:
 - Front-end: [Library Managerment](https://github.com/nhim411/vue-library-managerment)
 - Back-end: [Mock API Server](https://github.com/nhim411/mock-api-jwt-json-server)
-
+- Project backlog: [Project backlog](https://docs.google.com/spreadsheets/d/1CwKm7DWyvOA_mvVzEZnbPoLYO4Y0va0vv6bpdztSXqw/edit?usp=sharing)
 
 ## Description
 Library Managerment Website
