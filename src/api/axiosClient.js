@@ -7,7 +7,7 @@ import queryString from 'query-string'
 // config` for the full list of configs
 
 const axiosClient = axios.create({
-  baseURL: 'https://mock-api-2.herokuapp.com',
+  baseURL: 'http://localhost:8000',
   timeout: 5000,
   paramsSerializer: (params) => queryString.stringify(params)
 })

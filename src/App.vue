@@ -29,7 +29,7 @@ export default {
   data () {
     return {
       menu,
-      isLoading: true
+      isLoading: false
     }
   },
   async created () {
@@ -43,6 +43,7 @@ export default {
     // this.$store.commit('user', fakeUser)
     // this.$store.commit('setUser', fakeUser)
     if (storage.get('token')) {
+      this.isLoading = true
       const userId = storage.get('user')
       await this.$store.dispatch('getUserById', userId)
       await this.$store.dispatch('fetchBooks')
