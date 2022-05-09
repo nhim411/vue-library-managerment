@@ -14,14 +14,14 @@ const store = new Vuex.Store({
     userAvatar: null,
     userRole: null,
     userId: null,
-    users: null,
+    users: [],
     user: null,
 
     // Book
-    books: null,
+    books: [],
 
     // Book
-    categories: null,
+    categories: [],
 
     /* NavBar */
     isNavBarVisible: true,

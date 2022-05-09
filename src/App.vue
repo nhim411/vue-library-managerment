@@ -8,7 +8,7 @@
     <!-- <footer-bar /> -->
     <b-loading
       v-model="isLoading"
-      :is-full-page="true"
+      :is-full-page="false"
       :can-cancel="true"
     />
   </div>
