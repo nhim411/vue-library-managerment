@@ -206,7 +206,7 @@ router.beforeEach((to, from, next) => {
       next({ name: 'login' })
     } else {
       if (to.matched.some((record) => record.meta.requiresPermission)) {
-        if (store.state.user.role === 'admin') {
+        if (store.state?.user?.role === 'admin') {
           next()
         } else {
           next({ name: 'NotFound' })

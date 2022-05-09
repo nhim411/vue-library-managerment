@@ -71,8 +71,13 @@
                 class="card-content"
                 style="padding: 10px 0"
               >
-                <div class="content">
-                  <p class="title is-6 line-wrap">
+                <div
+                  class="content"
+                  style="padding: 0 10px"
+                >
+                  <p
+                    class="title is-6 line-wrap"
+                  >
                     {{ list.name }}
                   </p>
                   <p class="subtitle is-7 line-wrap">
